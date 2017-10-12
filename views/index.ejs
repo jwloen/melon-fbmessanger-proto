@@ -13,21 +13,22 @@
       const userId = Math.floor(Math.random() * 4) + 1;
       window.attachApp(userId, <%= listId %>, "<%= socketAddress %>");
     <% } else { %>
-      window.extAsyncInit = function() {
-        MessengerExtensions.getContext(
-          '282911732206558',
+      window.extAsyncInit = function() { MessengerExtensions.getContext('282911732206558',
+          
           function success(context) {
-            window.attachApp(
+            /* window.attachApp(
               context.psid,
               <%= listId %>,
               "<%= socketAddress %>",
               context.thread_type);
+              console.log("hello");
+              */
           }, function error(err) {
             window.attachApp();
           });
       };
     <% } %>
-      (function(d, s, id){
+      (function(d, s, id){	
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
         js = d.createElement(s); js.id = id;
