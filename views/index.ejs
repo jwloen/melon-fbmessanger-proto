@@ -14,10 +14,12 @@
       window.attachApp(userId, <%= listId %>, "<%= socketAddress %>");
     <% } else { %>
       window.extAsyncInit = function() { MessengerExtensions.getContext('282911732206558',
-          
           function success(context) {
-              console.log("hello");
-              
+            window.attachApp(
+              context.psid,
+              <%= listId %>,
+              "<%= socketAddress %>",
+              context.thread_type);
           }, function error(err) {
             window.attachApp();
           });
