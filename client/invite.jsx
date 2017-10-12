@@ -37,7 +37,7 @@ const Invite = ({
         console.error({errorCode, errorMessage});
       },
       messages.shareListMessage(apiUri, listId, title),
-      sharingMode);
+      "broadcast");
   };
 
   const iconClassName = sharingMode === 'broadcast' ? 'share' : 'send';
