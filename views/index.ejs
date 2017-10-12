@@ -16,13 +16,8 @@
       window.extAsyncInit = function() { MessengerExtensions.getContext('282911732206558',
           
           function success(context) {
-            /* window.attachApp(
-              context.psid,
-              <%= listId %>,
-              "<%= socketAddress %>",
-              context.thread_type);
               console.log("hello");
-              */
+              
           }, function error(err) {
             window.attachApp();
           });
