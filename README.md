@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Chat Extensions (Tasks)
 This is the folder for Tasks, a bot that demonstrates [Chat Extensions](https://developers.facebook.com/docs/messenger-platform/design-best-practices/guides/chat-extensions) on the Messenger Platform.
 
@@ -164,3 +165,6 @@ $ yarn start
 $ cd path/to/repo/chat-extensions
 $ yarn quality
 ```
+=======
+# melon-fbmessanger-proto
+>>>>>>> d4be5d5e45cf12bd07a116e9231cf613c99d3c28
