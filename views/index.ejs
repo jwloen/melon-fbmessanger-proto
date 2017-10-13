@@ -28,7 +28,7 @@
           console.log(context);
             window.attachApp(
               context.psid,
-              "<%= listId %>",
+              <%# <%= listId %> %>,
               "<%= socketAddress %>",
               context.thread_type);
           }, function error(err) {
