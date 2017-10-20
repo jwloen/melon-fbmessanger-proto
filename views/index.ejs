@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Melon ProtoType App</title>
+    <title>Shopping List</title>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <script src="/bundle.js"></script>
   </head>
   <body>
     <div id="content"></div>
     <script>
-    <%# Here is a basic EJS todo list %>
     <% if (demo) { %>
       // Use a random demo ID when viewing locally.
       const userId = Math.floor(Math.random() * 4) + 1;
       window.attachApp(userId, <%= listId %>, "<%= socketAddress %>");
     <% } else { %>
-     
-      window.extAsyncInit = function() { 
-      
-      MessengerExtensions.getUserID(function success(uids) {
-      	var psid = uids.psid;
-  
-	    }, function error(err, errorMessage) {      
-	    });  
-      
-      MessengerExtensions.getContext('282911732206558',
+      window.extAsyncInit = function() {
+        MessengerExtensions.getContext(
+          '1898084047093164',
           function success(context) {
-          console.log(context);
             window.attachApp(
               context.psid,
+              <%= listId %>,
               "<%= socketAddress %>",
               context.thread_type);
           }, function error(err) {
@@ -35,7 +27,7 @@
           });
       };
     <% } %>
-      (function(d, s, id){	
+      (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
         js = d.createElement(s); js.id = id;
