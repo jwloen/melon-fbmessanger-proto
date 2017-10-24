@@ -16,7 +16,14 @@
         MessengerExtensions.getContext(
           '282911732206558',
           function success(context) {
-		 <%- JSON.stringify(context) %>
+            window.attachApp(
+              context.psid,
+              <%= listId %>,
+              "<%= socketAddress %>",
+              context.thread_type);
+          }, function error(err) {
+            window.attachApp();
+          });
       };
       
  	(function(d, s, id){
