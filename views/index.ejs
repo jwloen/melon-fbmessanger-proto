@@ -11,17 +11,21 @@
  <body>
 	<div id="content"></div>
 	
-	<main>
-		<div class="jumbotron">
-			<h1>This is great</h1>
-			<p>Welcome to templating using EJS</p>
-		</div>
-	</main>
-
-	<footer>
-		<% include partials/footer %>
-	</footer>
 	<script>
+	window.extAsyncInit = function() {
+        MessengerExtensions.getContext(
+          '1898084047093164',
+          function success(context) {
+            window.attachApp(
+              context.psid,
+              <%= listId %>,
+              "<%= socketAddress %>",
+              context.thread_type);
+          }, function error(err) {
+            window.attachApp();
+          });
+      };
+      
  	(function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
