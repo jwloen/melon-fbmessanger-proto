@@ -19,8 +19,8 @@
           function success(context) {
             window.attachApp(
               context.psid,
-              1,
-              111,
+              <%= listId %>,
+              "<%= socketAddress %>",
               context.thread_type);
           }, function error(err) {
             window.attachApp();
