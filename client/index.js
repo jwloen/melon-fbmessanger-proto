@@ -34,7 +34,7 @@ window.attachApp = (viewerId, listId, socketAddress, threadType) => {
       // The main show
       <App
         viewerId={viewerId}
-        listId={1}
+        listId={listId}
         apiUri={apiUri}
         socketAddress={socketAddress}
         threadType={threadType}
