@@ -13,12 +13,12 @@
       const userId = Math.floor(Math.random() * 4) + 1;
       window.attachApp(userId, <%= listId %>, "<%= socketAddress %>");
     <% } else { %>
+    <% console.log(context) %>
+          <% console.log(<%= listId %>) %>
       window.extAsyncInit = function() {
         MessengerExtensions.getContext(
           '1898084047093164',
           function success(context) {
-          <% console.log(context) %>
-          <% console.log(<%= listId %>) %>
             window.attachApp(
               context.psid,
               <%= listId %>,
