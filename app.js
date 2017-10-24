@@ -84,7 +84,7 @@ app.use(function(req, res, next) {
 
 /* ----------  Primary / Happy Path  ---------- */
 
-app.use('/', main);
+app.use('/', index);
 app.use('/lists', lists);
 app.use('/webhook', webhooks);
 
