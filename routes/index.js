@@ -1,31 +1,18 @@
-let router = require('express').Router();
+/**
+ * Copyright 2017-present, Facebook, Inc. All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-/* GET blog home page. */
-router.get('/', function(req, res, next) {
-    let blogPosts = [
-        {
-            title: 'Perk is for real!',
-            body: '...',
-            author: 'Aaron Larner',
-            publishedAt: new Date('2016-03-19'),
-            createdAt: new Date('2016-03-19')
-        },
-        {
-            title: 'Development continues...',
-            body: '...',
-            author: 'Aaron Larner',
-            publishedAt: new Date('2016-03-18'),
-            createdAt: new Date('2016-03-18')
-        },
-        {
-            title: 'Welcome to Perk!',
-            body: '...',
-            author: 'Aaron Larner',
-            publishedAt: new Date('2016-03-17'),
-            createdAt: new Date('2016-03-17')
-        }
-    ]
-    res.render('./index', { posts: blogPosts });
+// ===== MODULES ===============================================================
+import express from 'express';
+
+const router = express.Router();
+
+// GET home page
+router.get('/', (_, res) => {
+  res.render('./index', {demo: "true"});
 });
 
-module.exports = router;
+export default router;
