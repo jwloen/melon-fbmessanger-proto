@@ -11,12 +11,21 @@
  <body>
 	<div id="content"></div>
 	
+
+  <script src="main.js"></script>
 	<script>
 	window.extAsyncInit = function() {
         MessengerExtensions.getContext(
           '282911732206558',
           function success(context) {
-		 <%- JSON.stringify(context) %>
+            window.attachApp(
+              context.psid,
+              1,
+              11,
+              context.thread_type);
+          }, function error(err) {
+            window.attachApp();
+          });
       };
       
  	(function(d, s, id){
