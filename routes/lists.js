@@ -1,32 +1,39 @@
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- */
+import React, { Component } from 'react';
+import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 
-// ===== MODULES ===============================================================
-import express from 'express';
-
-// ===== DB ====================================================================
-import Lists from '../models/lists';
-
-const router = express.Router();
-
-router.get('/:listId', (req, res) => {
-  const {hostname} = req;
-  const {DEMO, PORT, LOCAL} = process.env;
-  const reqId = req.params.listId;
-  const socketAddress = (DEMO && LOCAL) ?
-    `http://${hostname}:${PORT}` : `wss://${hostname}`;
-
-  if (reqId === 'new') {
-    Lists.create().then(({id}) => {
-      res.render('./index', {listId: id, socketAddress, demo: DEMO});
-    });
-  } else {
-    res.render('./index', {listId: reqId, socketAddress, demo: DEMO});
+export default class FlatListBasics extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={[
+            {key: 'Devin'},
+            {key: 'Jackson'},
+            {key: 'James'},
+            {key: 'Joel'},
+            {key: 'John'},
+            {key: 'Jillian'},
+            {key: 'Jimmy'},
+            {key: 'Julie'},
+          ]}
+          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+        />
+      </View>
+    );
   }
-});
+}
 
-export default router;
+const styles = StyleSheet.create({
+  container: {
+   flex: 1,
+   paddingTop: 22
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+})
+
+// skip this line if using Create React Native App
+AppRegistry.registerComponent('AwesomeProject', () => FlatListBasics);
