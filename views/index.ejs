@@ -5,14 +5,22 @@
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <script src="/bundle.js"></script>
   </head>
-  <header>
-		<% include partials/header %>
-	</header>
  <body>
-	<div id="content"></div>
-  
+  <div class="container">
+        <ul>
+          <% tracks.forEach(function(tracks) { %>
+            <a onClick = "onClick()">
+              <li><%= tracks.artist %> - <%= tracks.title %>
+                <img src ="<%= tracks.imgurl %>"></img>
+              </li>
+          <% }); %>
+        </ul>
+        
+  </div>
 	<script>
-  var messageToShare = {
+
+  function onClick(){
+    var messageToShare = {
       "attachment":{
          "type":"template",
          "payload":{
@@ -34,20 +42,7 @@
       }
     };
 
-
-	window.extAsyncInit = function() {
-        // MessengerExtensions.getContext(
-        //   '282911732206558',
-        //   function success(context) {
-        //     window.attachApp(
-        //       context.psid,
-        //       1,
-        //       11,
-        //       context.thread_type);
-        //   }, function error(err) {
-        //     window.attachApp();
-        //   });
-      
+    window.extAsyncInit = function() { 
     MessengerExtensions.beginShareFlow(function success(response) {
   	// User dismissed without error, but did they
         // share the message?
@@ -67,7 +62,11 @@
     messageToShare,
     "current_thread");    
 
-      };
+    };
+  }
+  
+
+	
       
  	(function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -79,5 +78,7 @@
     </script>
   </body>
 </html>
+
+
 
 
