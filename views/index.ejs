@@ -9,7 +9,7 @@
   <div class="container">
         <ul>
           <% tracks.forEach(function(tracks) { %>
-            <a onClick = "onClick()">
+            <a onClick = "handler('<%= tracks.artist %>','<%= tracks.title %>','<%= tracks.imgurl %>')">
               <li><%= tracks.artist %> - <%= tracks.title %>
                 <img src ="<%= tracks.imgurl %>"></img>
               </li>
@@ -19,16 +19,21 @@
   </div>
 	<script>
 
-  function onClick(){
-    console.log("adfasdfs");
+  function handler(artist,title,imgurl){
+    console.log(artist);
+    console.log(title);
+    console.log(imgurl);
+
+    var subject = artist + title;
+
     var messageToShare = {
       "attachment":{
          "type":"template",
          "payload":{
              "template_type":"generic",
              "elements": [{
-                 "title":"LIKELY - TWICE (트와이스)",
-                 "image_url": "http://cdnimg.melon.co.kr/cm/album/images/101/07/114/10107114_500.jpg/melon/resize/216/quality/80/optimize",
+                 "title": subject,
+                 "image_url": imgurl,
                  "default_action":{
                      "type":"web_url",
                      "url": "https://melon.do/mZjoCNggH"
@@ -76,7 +81,6 @@
     </script>
   </body>
 </html>
-
 
 
 
