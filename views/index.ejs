@@ -44,7 +44,7 @@
       }
     };
 
-    window.extAsyncInit = function() { 
+    //window.extAsyncInit = function() { 
       MessengerExtensions.beginShareFlow(function success(response) {
       // User dismissed without error, but did they
           // share the message?
@@ -63,8 +63,7 @@
       },
       messageToShare,
       "current_thread");    
-
-    };
+    //};
 
     (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
