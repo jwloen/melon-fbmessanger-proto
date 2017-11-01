@@ -66,16 +66,19 @@ const createListButton = ( ) => {
  */
 const welcomeMessage = (apiUri) => {
   return {
-    attachment: {
-      type: 'template',
-      payload: {
-        template_type: 'button',
-        text: '안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요',
-        buttons: [
-          createListButton(),
-        ],
-      },
+    message:{
+      text:'안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요'
     },
+    // attachment: {
+    //   type: 'template',
+    //   payload: {
+    //     template_type: 'generic',
+    //     text: '안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요',
+    //     buttons: [
+    //       createListButton(),
+    //     ],
+    //   },
+    // },
   };
 };
 
