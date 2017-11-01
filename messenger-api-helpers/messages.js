@@ -225,9 +225,9 @@ const shareListMessage = (apiUri, listId, title, buttonText) => {
 
 export default {
   welcomeMessage,
-  listCreatedMessage,
-  paginatedListsMessage,
-  createListButton,
-  noListsMessage,
-  shareListMessage,
+  // listCreatedMessage,
+  // paginatedListsMessage,
+  // createListButton,
+  // noListsMessage,
+  // shareListMessage,
 };

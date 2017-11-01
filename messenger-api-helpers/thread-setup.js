@@ -36,38 +36,38 @@ const domainWhitelisting = () => {
   );
 };
 
-/**
- * Sets the persistent menu for the application
- *
- * @returns {undefined}
- */
-const persistentMenu = () => {
-  api.callThreadAPI(
-    {
-      setting_type: 'call_to_actions',
-      thread_state: 'existing_thread',
-      call_to_actions: [
-        {
-          type: 'web_url',
-          title: 'Create List',
-          url: `${APP_URL}/lists/new`,
-          webview_height_ratio: 'tall',
-          messenger_extensions: true,
-        },
-        {
-          type: 'postback',
-          title: 'My Lists',
-          payload: 'owned_lists',
-        },
-        {
-          type: 'postback',
-          title: 'Shared With Me',
-          payload: 'subscribed_lists',
-        },
-      ],
-    }
-  );
-};
+// /**
+//  * Sets the persistent menu for the application
+//  *
+//  * @returns {undefined}
+//  */
+// const persistentMenu = () => {
+//   api.callThreadAPI(
+//     {
+//       setting_type: 'call_to_actions',
+//       thread_state: 'existing_thread',
+//       call_to_actions: [
+//         {
+//           type: 'web_url',
+//           title: 'Create List',
+//           url: `${APP_URL}/lists/new`,
+//           webview_height_ratio: 'tall',
+//           messenger_extensions: true,
+//         },
+//         {
+//           type: 'postback',
+//           title: 'My Lists',
+//           payload: 'owned_lists',
+//         },
+//         {
+//           type: 'postback',
+//           title: 'Shared With Me',
+//           payload: 'subscribed_lists',
+//         },
+//       ],
+//     }
+//   );
+// };
 
 /**
  * Sets the Get Started button for the application
@@ -90,6 +90,6 @@ const getStartedButton = () => {
 
 export default {
   domainWhitelisting,
-  persistentMenu,
+//  persistentMenu,
   getStartedButton,
 };
