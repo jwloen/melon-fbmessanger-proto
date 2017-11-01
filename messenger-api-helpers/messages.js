@@ -42,12 +42,13 @@ const openExistingListButton = (listUrl, buttonText = 'Edit List') => {
  *   Message to create a button pointing to the new list form.
  */
 const createListButton = ( ) => {
-     return {
-       type: 'web_url',
-       url: `https://m.app.melon.com`,
-       title: '음악이 필요한 순간, 멜론',
-       webview_height_ratio: 'tall',
-       messenger_extensions: true,
+  return {
+    type: 'web_url',
+    url: `https://m.app.melon.com`,
+    title: '음악이 필요한 순간, 멜론',
+    webview_height_ratio: 'tall',
+    messenger_extensions: true,
+  };
 };
 
 /*
