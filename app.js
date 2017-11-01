@@ -135,7 +135,6 @@ app.use((err, req, res) => {
    ============================================= */
 
 ThreadSetup.domainWhitelisting();
-// ThreadSetup.persistentMenu();
 ThreadSetup.getStartedButton();
 
 /* =============================================
