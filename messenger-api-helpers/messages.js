@@ -66,9 +66,6 @@ const createListButton = ( ) => {
  */
 const welcomeMessage = (apiUri) => {
   return {
-    message:{
-      text:'안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요'
-    },
     // attachment: {
     //   type: 'template',
     //   payload: {
@@ -79,6 +76,18 @@ const welcomeMessage = (apiUri) => {
     //     ],
     //   },
     // },
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements:[
+          {
+           title:"Welcome to Peter\'s Hats",
+           subtitle:'안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요',
+         }
+       ]
+      },
+    },
   };
 };
 
