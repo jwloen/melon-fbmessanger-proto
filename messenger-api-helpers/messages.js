@@ -33,23 +33,23 @@
 //   };
 // };
 
-/**
- * Button for opening a new list in a webview
- *
- * @param {string} apiUri - Hostname of the server.
- * @param {string=} buttonTitle - Button title.
- * @returns {object} -
- *   Message to create a button pointing to the new list form.
- */
-const createListButton = ( ) => {
-  return {
-    type: 'web_url',
-    url: `https://m.app.melon.com`,
-    title: '음악이 필요한 순간, 멜론',
-    webview_height_ratio: 'tall',
-    messenger_extensions: true,
-  };
-};
+// /**
+//  * Button for opening a new list in a webview
+//  *
+//  * @param {string} apiUri - Hostname of the server.
+//  * @param {string=} buttonTitle - Button title.
+//  * @returns {object} -
+//  *   Message to create a button pointing to the new list form.
+//  */
+// const createListButton = ( ) => {
+//   return {
+//     type: 'web_url',
+//     url: `https://m.app.melon.com`,
+//     title: '음악이 필요한 순간, 멜론',
+//     webview_height_ratio: 'tall',
+//     messenger_extensions: true,
+//   };
+// };
 
 /*
  * MESSAGES
@@ -91,137 +91,137 @@ const welcomeMessage = (apiUri) => {
   };
 };
 
-/**
- * Message for when the user has no lists yet.
- *
- * @param {string} apiUri - Hostname of the server.
- * @returns {object} - Message with welcome text and a button to start a new list.
- */
-const noListsMessage = (apiUri) => {
-  return {
-    attachment: {
-      type: 'template',
-      payload: {
-        template_type: 'button',
-        text: 'It looks like you don’t have any lists yet. Would you like to create one?',
-        buttons: [
-          createListButton(apiUri),
-        ],
-      },
-    },
-  };
-};
+// /**
+//  * Message for when the user has no lists yet.
+//  *
+//  * @param {string} apiUri - Hostname of the server.
+//  * @returns {object} - Message with welcome text and a button to start a new list.
+//  */
+// const noListsMessage = (apiUri) => {
+//   return {
+//     attachment: {
+//       type: 'template',
+//       payload: {
+//         template_type: 'button',
+//         text: 'It looks like you don’t have any lists yet. Would you like to create one?',
+//         buttons: [
+//           createListButton(apiUri),
+//         ],
+//       },
+//     },
+//   };
+// };
 
-/**
- * Helper to construct a URI for the desired list
- *
- * @param {string} apiUri -
- *   Base URI for the server.
- *   Because this moduele may be called from the front end, we need to pass it explicitely.
- * @param {int} listId - The list ID.
- * @returns {string} - URI for the required list.
- */
-const listUrl = (apiUri, listId) => `${apiUri}/lists/${listId}`;
+// /**
+//  * Helper to construct a URI for the desired list
+//  *
+//  * @param {string} apiUri -
+//  *   Base URI for the server.
+//  *   Because this moduele may be called from the front end, we need to pass it explicitely.
+//  * @param {int} listId - The list ID.
+//  * @returns {string} - URI for the required list.
+//  */
+// const listUrl = (apiUri, listId) => `${apiUri}/lists/${listId}`;
 
-/**
- * A single list for the list template.
- * The name here is to distinguish lists and list templates.
- *
- * @param {string} id            - List ID.
- * @param {string} apiUri        - Url of endpoint.
- * @param {string} subscriberIds - Ids of each subscriber.
- * @param {string} title         - List title.
- * @returns {object} - Message with welcome text and a button to start a new list.
- */
-const listElement = ({id, subscriberIds, title}, apiUri) => {
-  return {
-    title: title,
-    subtitle: `Shared with ${[...subscriberIds].length} people`,
-    default_action: {
-      type: 'web_url',
-      url: listUrl(apiUri, id),
-      messenger_extensions: true,
-      webview_height_ratio: 'tall',
-    },
-  };
-};
+// /**
+//  * A single list for the list template.
+//  * The name here is to distinguish lists and list templates.
+//  *
+//  * @param {string} id            - List ID.
+//  * @param {string} apiUri        - Url of endpoint.
+//  * @param {string} subscriberIds - Ids of each subscriber.
+//  * @param {string} title         - List title.
+//  * @returns {object} - Message with welcome text and a button to start a new list.
+//  */
+// const listElement = ({id, subscriberIds, title}, apiUri) => {
+//   return {
+//     title: title,
+//     subtitle: `Shared with ${[...subscriberIds].length} people`,
+//     default_action: {
+//       type: 'web_url',
+//       url: listUrl(apiUri, id),
+//       messenger_extensions: true,
+//       webview_height_ratio: 'tall',
+//     },
+//   };
+// };
 
-/**
- * Messages for a list template of lists (meta!), offset by how many
- * "read mores" the user has been through
- *
- * @param {string} apiUri - Hostname of the server.
- * @param {string} action - The postback action
- * @param {Array.<Object>} lists - All of the lists to be (eventually) displayed.
- * @param {int=} offset - How far through the list we are so far.
- * @returns {object} - Message with welcome text and a button to start a new list.
- */
-const paginatedListsMessage = (apiUri, action, lists, offset = 0) => {
-  const pageLists = lists.slice(offset, offset + 4);
+// /**
+//  * Messages for a list template of lists (meta!), offset by how many
+//  * "read mores" the user has been through
+//  *
+//  * @param {string} apiUri - Hostname of the server.
+//  * @param {string} action - The postback action
+//  * @param {Array.<Object>} lists - All of the lists to be (eventually) displayed.
+//  * @param {int=} offset - How far through the list we are so far.
+//  * @returns {object} - Message with welcome text and a button to start a new list.
+//  */
+// const paginatedListsMessage = (apiUri, action, lists, offset = 0) => {
+//   const pageLists = lists.slice(offset, offset + 4);
 
-  let buttons;
-  if (lists.length > (offset + 4)) {
-    buttons = [
-      {
-        title: 'View More',
-        type: 'postback',
-        payload: `${action}_OFFSET_${offset + 4}`,
-      },
-    ];
-  }
+//   let buttons;
+//   if (lists.length > (offset + 4)) {
+//     buttons = [
+//       {
+//         title: 'View More',
+//         type: 'postback',
+//         payload: `${action}_OFFSET_${offset + 4}`,
+//       },
+//     ];
+//   }
 
-  return {
-    attachment: {
-      type: 'template',
-      payload: {
-        template_type: 'list',
-        top_element_style: 'compact',
-        elements: pageLists.map((list) => listElement(list, apiUri)),
-        buttons,
-      },
-    },
-  };
-};
+//   return {
+//     attachment: {
+//       type: 'template',
+//       payload: {
+//         template_type: 'list',
+//         top_element_style: 'compact',
+//         elements: pageLists.map((list) => listElement(list, apiUri)),
+//         buttons,
+//       },
+//     },
+//   };
+// };
 
-/**
- * Message that informs the user that their list has been created.
- */
-const listCreatedMessage = {
-  text: 'Your list was created.',
-};
+// /**
+//  * Message that informs the user that their list has been created.
+//  */
+// const listCreatedMessage = {
+//   text: 'Your list was created.',
+// };
 
-/**
- * Message to configure the customized sharing menu in the webview
- *
- * @param {string} apiUri - Application basename
- * @param {string} listId - The ID for list to be shared
- * @param {string} title - Title of the list
- * @param {string} buttonText - Text for the action button.
- * @returns {object} - Message to configure the customized sharing menu.
- */
-const shareListMessage = (apiUri, listId, title, buttonText) => {
-  const urlToList = listUrl(apiUri, listId);
-  console.log({urlToList});
-  return {
-    attachment: {
-      type: 'template',
-      payload: {
-        template_type: 'generic',
-        elements: [{
-          title: title,
-          image_url: `${apiUri}/media/button-cover.png`,
-          subtitle: 'A shared list from Tasks',
-          default_action: {
-            type: 'web_url',
-            url: urlToList,
-            messenger_extensions: true,
-          },
-          buttons: [openExistingListButton(urlToList, buttonText)],
-        }],
-      },
-    },
-  };
-};
+// /**
+//  * Message to configure the customized sharing menu in the webview
+//  *
+//  * @param {string} apiUri - Application basename
+//  * @param {string} listId - The ID for list to be shared
+//  * @param {string} title - Title of the list
+//  * @param {string} buttonText - Text for the action button.
+//  * @returns {object} - Message to configure the customized sharing menu.
+//  */
+// const shareListMessage = (apiUri, listId, title, buttonText) => {
+//   const urlToList = listUrl(apiUri, listId);
+//   console.log({urlToList});
+//   return {
+//     attachment: {
+//       type: 'template',
+//       payload: {
+//         template_type: 'generic',
+//         elements: [{
+//           title: title,
+//           image_url: `${apiUri}/media/button-cover.png`,
+//           subtitle: 'A shared list from Tasks',
+//           default_action: {
+//             type: 'web_url',
+//             url: urlToList,
+//             messenger_extensions: true,
+//           },
+//           buttons: [openExistingListButton(urlToList, buttonText)],
+//         }],
+//       },
+//     },
+//   };
+// };
 
 export default {
   welcomeMessage,
