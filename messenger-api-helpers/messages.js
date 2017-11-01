@@ -42,13 +42,12 @@ const openExistingListButton = (listUrl, buttonText = 'Edit List') => {
  *   Message to create a button pointing to the new list form.
  */
 const createListButton = ( ) => {
-  return {
-    type: 'web_url',
-    url: `https://m.app.melon.com`,
-    title: '음악이 필요한 순간, 멜론',
-    webview_height_ratio: 'tall',
-    messenger_extensions: true,
-  };
+     return {
+       type: 'web_url',
+       url: `https://m.app.melon.com`,
+       title: '음악이 필요한 순간, 멜론',
+       webview_height_ratio: 'tall',
+       messenger_extensions: true,
 };
 
 /*
@@ -69,10 +68,10 @@ const welcomeMessage = (apiUri) => {
     attachment: {
       type: 'template',
       payload: {
-        template_type: 'generic',
+        template_type: 'button',
         text: '안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요',
         buttons: [
-          createListButton(),
+          createListButton(apiUri),
         ],
       },
     },
@@ -93,7 +92,7 @@ const noListsMessage = (apiUri) => {
         template_type: 'button',
         text: 'It looks like you don’t have any lists yet. Would you like to create one?',
         buttons: [
-          createListButton(),
+          createListButton(apiUri),
         ],
       },
     },
