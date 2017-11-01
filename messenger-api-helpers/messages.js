@@ -41,11 +41,11 @@ const openExistingListButton = (listUrl, buttonText = 'Edit List') => {
  * @returns {object} -
  *   Message to create a button pointing to the new list form.
  */
-const createListButton = (apiUri, buttonTitle = 'Create a List') => {
+const createListButton = ( ) => {
   return {
     type: 'web_url',
-    url: `${apiUri}/lists/new`,
-    title: buttonTitle,
+    url: `https://m.app.melon.com`,
+    title: '음악이 필요한 순간, 멜론',
     webview_height_ratio: 'tall',
     messenger_extensions: true,
   };
@@ -71,11 +71,8 @@ const welcomeMessage = (apiUri) => {
       payload: {
         template_type: 'generic',
         text: '안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요',
-        buttons: [{
-          "type":"web_url",
-          "url":"https://m.app.melon.com",
-          "title":"음악이 필요한 순간, 멜론"
-          }
+        buttons: [
+          createListButton(),
         ],
       },
     },
@@ -96,7 +93,7 @@ const noListsMessage = (apiUri) => {
         template_type: 'button',
         text: 'It looks like you don’t have any lists yet. Would you like to create one?',
         buttons: [
-          createListButton(apiUri),
+          createListButton(),
         ],
       },
     },
