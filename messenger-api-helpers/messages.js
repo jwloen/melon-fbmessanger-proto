@@ -69,10 +69,13 @@ const welcomeMessage = (apiUri) => {
     attachment: {
       type: 'template',
       payload: {
-        template_type: 'button',
-        text: 'Ready to make a shared list with your friends? Everyone can add items, check things off, and stay in sync.',
-        buttons: [
-          createListButton(apiUri),
+        template_type: 'generic',
+        text: '안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요',
+        buttons: [{
+          "type":"web_url",
+          "url":"https://m.app.melon.com",
+          "title":"음악이 필요한 순간, 멜론"
+          }
         ],
       },
     },
