@@ -15,7 +15,7 @@
           <% tracks.forEach(function(tracks) { %>
             <a onClick = "handler('<%= tracks.artist %>','<%= tracks.title %>','<%= tracks.imgurl %>','<%= tracks.link %>')">
               <li style="padding: 0 5px 10px 10px">
-                <img style="display:inline; margin-right: 10px;" src ="<%= tracks.imgurl %>/melon/resize/50" class="img-responsive" alt="Responsive image"></img>
+                <img style="display:inline; margin-right: 10px;" src ="<%= tracks.imgurl %>/melon/resize/50"></img>
                 <span>  <%= tracks.title %> - <%= tracks.artist %> </span>
               </li>
           <% }); %>
@@ -41,7 +41,7 @@
                  "buttons":[{
                      "type":"web_url",
                      "url":"https://m.app.melon.com",
-                     "title":"음악이 필요한 순간, 멜론"
+                     "title":"음악을 즐기다 MelOn"
                  }]
              }]
          }
