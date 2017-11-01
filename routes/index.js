@@ -29,6 +29,18 @@ const tracks = [
     imgurl: 'http://cdnimg.melon.co.kr/cm/album/images/101/05/030/10105030.jpg',
     link: 'https://melon.do/w2nksaJVH'
   },
+  {
+    artist: '멜로망스',
+    title: '선물',
+    imgurl: 'http://cdnimg.melon.co.kr/cm/album/images/100/78/176/10078176.jpg',
+    link: 'https://melon.do/AgaPhIdmE'
+  },
+  {
+    artist: '트와이스',
+    title: 'LIKEY',
+    imgurl: 'http://cdnimg.melon.co.kr/cm/album/images/101/07/114/10107114.jpg',
+    link: 'https://melon.do/K7h5ZPZgH'
+  },
 ]
 
 
