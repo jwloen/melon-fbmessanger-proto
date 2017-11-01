@@ -23,15 +23,15 @@
  * @returns {object} -
  *   Message to create a button pointing to the list in a webview.
  */
-const openExistingListButton = (listUrl, buttonText = 'Edit List') => {
-  return {
-    type: 'web_url',
-    title: buttonText,
-    url: listUrl,
-    messenger_extensions: true,
-    webview_height_ratio: 'tall',
-  };
-};
+// const openExistingListButton = (listUrl, buttonText = 'Edit List') => {
+//   return {
+//     type: 'web_url',
+//     title: buttonText,
+//     url: listUrl,
+//     messenger_extensions: true,
+//     webview_height_ratio: 'tall',
+//   };
+// };
 
 /**
  * Button for opening a new list in a webview
@@ -82,8 +82,8 @@ const welcomeMessage = (apiUri) => {
         template_type: 'generic',
         elements:[
           {
-           title:"Welcome to Peter\'s Hats",
-           subtitle:'안녕하세요! 멜론을 통해 친구와 음악을 공유하고 함께 들어보세요',
+           title:"음악이 필요한 순간, 멜론",
+           subtitle:'안녕하세요! 멜론을 통해 메신저 앱으로 친구와 음악을 공유하고 함께 들어보세요!',
          }
        ]
       },
