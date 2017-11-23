@@ -46,7 +46,8 @@ const tracks = [
 
 // GET home page
 router.get('/', (_, res) => {
-  res.render('./index', {demo: process.env.DEMO, tracks : tracks} );
+  res.redirect('https://m.app.melon.com');
+  //res.render('./index', {demo: process.env.DEMO, tracks : tracks} );
 });
 
 export default router;
