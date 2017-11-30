@@ -46,7 +46,7 @@ const tracks = [
 
 // GET home page
 router.get('/', (_, res) => {
-  res.redirect('https://m.app.melon.com');
+  res.redirect('http://m.search.melon.com/search/facebook/index.htm');
   //res.render('./index', {demo: process.env.DEMO, tracks : tracks} );
 });
 
