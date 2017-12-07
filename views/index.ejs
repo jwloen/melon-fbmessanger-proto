@@ -13,7 +13,7 @@
   <div class="content">
         <ul>
           <% tracks.forEach(function(tracks) { %>
-            <a onClick = "handler('<%= tracks.artist %>','<%= tracks.title %>','<%= tracks.imgurl %>','<%= tracks.link %>')">
+            <a onClick = "handler('IU','Pallete (Feat. G-DRAGON)','http://cdnimg.melon.co.kr/cm/album/images/100/56/666/10056666_500.jpg','http://m.app.melon.com/pda/msvc/snsGatePage.jsp?type=son&sId=8186711&ref=facebook')">
               <li style="padding: 0 5px 10px 10px">
                 <img style="display:inline; margin-right: 10px;" src ="<%= tracks.imgurl %>/melon/resize/50"></img>
                 <span>  <%= tracks.title %> - <%= tracks.artist %> </span>
@@ -26,28 +26,52 @@
 	<script>
 
   function handler(artist,title,imgurl,link){
+    // var subject = title + " - " + artist;
+    // var messageToShare = {
+    //   "attachment":{
+    //      "type":"template",
+    //      "payload":{
+    //          "template_type":"generic",
+    //          "elements": [{
+    //              "title": subject,
+    //              "image_url": imgurl,
+    //              "default_action":{
+    //                  "type":"web_url",
+    //                  "url": link
+    //              },
+    //              "buttons":[{
+    //                  "type":"web_url",
+    //                  "url":"https://m.app.melon.com",
+    //                  "title":"음악이 필요한 순간, 멜론"
+    //              }]
+    //          }]
+    //      }
+    //   }
+    // };
     var subject = title + " - " + artist;
-    var messageToShare = {
-      "attachment":{
-         "type":"template",
-         "payload":{
-             "template_type":"generic",
-             "elements": [{
-                 "title": subject,
-                 "image_url": imgurl,
-                 "default_action":{
-                     "type":"web_url",
-                     "url": link
-                 },
-                 "buttons":[{
-                     "type":"web_url",
-                     "url":"https://m.app.melon.com",
-                     "title":"음악이 필요한 순간, 멜론"
-                 }]
-             }]
-         }
-      }
-    };
+        var messageToShare = {
+            "attachment":{
+                "type":"template",
+                "payload":{
+                    "template_type":"generic",
+                    "elements": [{
+                        "title": subject,
+                        "image_url": imgurl,
+                        "default_action":{
+                            "type":"web_url",
+                            "url": link,
+                            "messenger_extensions": true
+                        },
+                        "buttons":[{
+                            "type":"web_url",
+                            "url":"https://m.app.melon.com",
+                            "title":"음악이 필요한 순간, 멜론",
+                            "messenger_extensions": true
+                        }]
+                    }]
+                }
+            }
+        };
   
     window.MessengerExtensions.beginShareFlow(
       function success(response) {
