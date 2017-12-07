@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<c:set var="curURL">http://${pageContext.request.serverName}${requestScope['javax.servlet.forward.request_uri']}${empty requestScope['javax.servlet.forward.query_string'] ? '' : '?'}${requestScope['javax.servlet.forward.query_string']}</c:set>
+<head>
+<title>Melon</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=medium-dpi"/>
+<meta name="format-detection" content="telephone=no" />
+<meta property="og:title" content="${empty OGTITLE ? 'Melon' : OGTITLE}">
+<meta property="fb:app_id" content="357952407588971">
+<meta property="og:image" content="${empty OGIMAGE ? 'https://cdnimg.melon.co.kr/resource/mobile40/cds/common/image/melon.png' : OGIMAGE}">
+<meta property="og:url" content="${curURL}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:description" content="${empty OGDESCRIPTION ? '음악이 필요한 순간, 멜론' : OGDESCRIPTION}">
+<link rel="apple-touch-icon-precomposed" href="https://cdnimg.melon.co.kr/resource/mobile40/cds/common/image/mobile_apple_120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://cdnimg.melon.co.kr/resource/mobile40/cds/common/image/mobile_apple_180x180.png">
+<link rel="shortcut icon" type="image/x-icon" href="https://cdnimg.melon.co.kr/resource/mobile40/cds/common/image/favicon.ico">
+
+<link rel="stylesheet" type="text/css" href="https://m.app.melon.com//resource/mobile40/cds/common/css/melon.css?tm=20171121"/>
+
+<script type="text/javascript" src="https://m.app.melon.com/resource/mobile40/cds/common/js/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="https://m.app.melon.com/resource/script/members/common/authCookie.js?tm=2016083018"></script>
+<script type="text/javascript" src="https://m.app.melon.com//resource/mobile40/cds/common/js/uiscript.js?tm=201706278"></script>
+<script type="text/javascript" src="https://m.app.melon.com//resource/mobile40/cds/common/js/jquery.ba-bbq.min.js"></script>
+
+<!-- 검색 css -->
+<c:if test="${fn:indexOf(uri,'/search/') != -1}">
+    <link rel="stylesheet" type="text/css" href="https://m.app.melon.com/resource/mobile40/cds/search/css/search.css#/resource/style/m1/hl/b/16397ssz7h.css" />
+    
+</c:if>
+
+</head>
+
+<body>
+<script>
+
+
+    $(document).ready(function() {
+        var memberKey = getMemberKey();
+        if(memberKey != null && memberKey != '' && memberKey != undefined) {
+            $('#userNm').html("<li> memberKey : "+ memberKey);
+        }
+
+        var pocId = getCookie("POC");
+        if(pocId != null) {
+            $('#pocId').html("<li> pocId : "+ pocId);
+        }
+
+        var userAgent = navigator.userAgent;
+        $('#userAgent').html("<li> "+ userAgent);
+
+    });
+    //로그인 공통
+    function facebookSubmit(){
+        if(isMelonLogin()) {
+            alert("이미 로그인중입니다.");
+            return;
+        }
+
+        if(!isMelonLogin()) {
+            try {
+
+                var curUrl = encodeURIComponent(document.location.href);
+                location.href="https://member.melon.com/muid/mobile/login/login_inform.htm?returnPage="+ curUrl;
+
+            } catch(e) {
+                alert(e);
+            }
+            return;
+        }
+    }
+
+    function facebookLogout() {
+        document.location.href = "https://member.melon.com/muid/mobile/logout/logout_inform.htm";
+    }
+
+    //하드 코딩 한 컨텐츠를 전송하기 위해 임으로 생성한 메소드입니다.
+    //messageToShare 부분의 내용이 공유를 위해 실제적으로 셋팅할 부분입니다.
+    function handler(artist, title, imgurl, link){
+    	var subject = title + " - " + artist;
+        var messageToShare = {
+            "attachment":{
+                "type":"template",
+                "messenger_extensions": true,
+                "payload":{
+                    "template_type":"generic",
+                    "messenger_extensions": true,
+                    "elements": [{
+                        "title": subject,
+                        "image_url": imgurl,
+                        "default_action":{
+                            "type":"web_url",
+                            "url": link,
+                            "messenger_extensions": true
+                        },
+                        "buttons":[{
+                            "type":"web_url",
+                            "url":"https://m.app.melon.com",
+                            "title":"음악이 필요한 순간, 멜론",
+                            "messenger_extensions": true
+                        }]
+                    }]
+                }
+            }
+        };
+
+		/*MessengerExtensions.getSupportedFeatures(function success(result) {
+			alert('result : '+ result);
+			
+        	var features = result.supported_features;
+        	
+        	alert(features);
+		}, function error(err) {
+			alert('error : '+ err);
+		});*/
+
+		try {
+			window.MessengerExtensions.beginShareFlow(
+		            function success(response) {
+		            	alert(response);
+		                if (response.is_sent) {
+		                    alert("send success");
+		                    window.MessengerExtensions.requestCloseBrowser(null, null);
+		                }
+		            }, function error(errorCode, errorMessage) {
+		                alert(errorCode + ":" + errorMessage);
+		            },
+		            messageToShare,
+		            "current_thread");
+		} catch(e) {
+			alert(e);
+		}
+    }
+    
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+        	return;
+        }
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+    
+    window.extAsyncInit = function() {
+    	// the Messenger Extensions JS SDK is done loading 
+        alert("This alert is not being executed in webview or chrome mobile");
+    };
+    
+</script>
+
+<div class="container">
+	<div class="wrapper search_song">
+	
+	<ul class="switch_toggle col3">
+		<div class="account">
+				<li> <a href="javascript:facebookSubmit();">로그인이동1</a>
+				<div id="userNm"></div>
+				<div id="pocId"></div>
+				<div id="userAgent"></div>
+		</div>
+	</ul>
+
+	<div class="service_header">
+		<div class="controls">
+			<button type="button" class="sprite check hide mlog_without_page_change" id="check_all_btn" >전체선택</button>
+			<button type="button" class="sprite play small gray hide mlog_without_page_change" id="play_all_btn" >전체재생</button>
+		</div>
+	</div>
+		<ul class="service_list list_music webview_more">
+			
+	        <li class="list_item">
+	            <div class="thumb">
+	                <div class="inner">
+	                    <span class="img" style="background-image: url('https://cdnimg.melon.co.kr/cm/album/images/100/56/666/10056666_500.jpg/melon/resize/144/quality/80/optimize');"></span>
+	                </div>
+	            </div>
+	            <div class="content" onclick="handler('IU','Pallete (Feat. G-DRAGON)','http://cdnimg.melon.co.kr/cm/album/images/100/56/666/10056666_500.jpg','http://m.app.melon.com/pda/msvc/snsGatePage.jsp?type=son&sId=8186711&ref=facebook');">
+	                <div class="inner">
+	                    <p class="title ellipsis">
+	                        <span class="sprite title hide">타이틀</span>
+	                        팔레트 (Feat. G-DRAGON)
+	                    </p>
+	                    <span class="name ellipsis"><span class="word_point">아이유</span></span>
+	                </div>
+	            </div>
+				<div class="content button">
+					<button type="button" class="sprite play small hide play_item_btn">재생</button>
+				</div>
+	        </li>
+	    
+	        <li class="list_item">
+	            <div class="thumb">
+	                <div class="inner"  >
+	                    <span class="img" style="background-image: url('https://cdnimg.melon.co.kr/cm/album/images/100/96/855/10096855_500.jpg?143adaa26f0aeb5c274cb302ddac684f/melon/resize/144/quality/80/optimize');"></span>
+	                </div>
+	            </div>
+	            <div class="content" onclick="handler('아이유','잠 못 드는 밤 비는 내리고','https://cdnimg.melon.co.kr/cm/album/images/100/96/855/10096855_500.jpg?143adaa26f0aeb5c274cb302ddac684f','https://m.app.melon.com/pda/msvc/snsGatePage.jsp?type=son&sId=8186711&ref=facebook');">
+	                <div class="inner">
+	                    <p class="title ellipsis">
+	                        <span class="sprite title hide">타이틀</span>
+	                        잠 못 드는 밤 비는 내리고
+	                    </p>
+						<span class="name ellipsis"><span class="word_point">아이유</span></span>
+	                </div>
+	            </div>
+				<div class="content button">
+					<button type="button" class="sprite play small hide play_item_btn" >재생</button>
+				</div>
+	        </li>
+	    
+	        <li class="list_item">
+	            <div class="thumb">
+	                <div class="inner" >
+	                    <span class="img" style="background-image: url('https://cdnimg.melon.co.kr/cm/album/images/022/56/290/2256290_500.jpg/melon/resize/144/quality/80/optimize');"></span>
+	                </div>
+	            </div>
+	            <div class="content" onclick="handler('아이유','나의 옛날이야기','https://cdnimg.melon.co.kr/cm/album/images/022/56/290/2256290_500.jpg','https://m.app.melon.com/pda/msvc/snsGatePage.jsp?type=son&sId=8186711&ref=facebook');">
+	                <div class="inner">
+	                    <p class="title ellipsis">
+	                        <span class="sprite title hide">타이틀</span>
+	                        나의 옛날이야기
+	                    </p>
+                        <span class="name ellipsis"><span class="word_point">아이유</span></span>
+	                </div>
+	            </div>
+				<div class="content button">
+					<button type="button" class="sprite play small hide play_item_btn">재생</button>
+				</div>
+	        </li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>
