@@ -51,16 +51,19 @@
   
     window.MessengerExtensions.beginShareFlow(
       function success(response) {
+        alert("success");
         if (response.is_sent) {
           window.MessengerExtensions.requestCloseBrowser(null, null);
         }
       }, function error(errorCode, errorMessage) {
+        alert("error");
       },
       messageToShare,
       "current_thread");  
       
   }
   window.extAsyncInit = function() {
+    alert("AsyncInit ok");
     };
   (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
