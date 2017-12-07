@@ -46,8 +46,8 @@ const tracks = [
 
 // GET home page
 router.get('/', (_, res) => {
-  res.redirect('http://m.search.melon.com/search/facebook/index.htm?memberKey=0');
-  //res.render('./home', {demo: process.env.DEMO, tracks : tracks} );
+  //res.redirect('http://m.search.melon.com/search/facebook/index.htm?memberKey=0');
+  res.render('./home', {demo: process.env.DEMO, tracks : tracks} );
 });
 
 export default router;
