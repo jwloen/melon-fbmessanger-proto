@@ -75,80 +75,53 @@
         document.location.href = "https://member.melon.com/muid/mobile/logout/logout_inform.htm";
     }
 
-    //하드 코딩 한 컨텐츠를 전송하기 위해 임으로 생성한 메소드입니다.
-    //messageToShare 부분의 내용이 공유를 위해 실제적으로 셋팅할 부분입니다.
-    function handler(artist, title, imgurl, link){
-    	var subject = title + " - " + artist;
-        var messageToShare = {
-            "attachment":{
-                "type":"template",
-                "messenger_extensions": true,
-                "payload":{
-                    "template_type":"generic",
-                    "messenger_extensions": true,
-                    "elements": [{
-                        "title": subject,
-                        "image_url": imgurl,
-                        "default_action":{
-                            "type":"web_url",
-                            "url": link,
-                            "messenger_extensions": true
-                        },
-                        "buttons":[{
-                            "type":"web_url",
-                            "url":"https://m.app.melon.com",
-                            "title":"음악이 필요한 순간, 멜론",
-                            "messenger_extensions": true
-                        }]
-                    }]
-                }
-            }
-        };
-
-		/*MessengerExtensions.getSupportedFeatures(function success(result) {
-			alert('result : '+ result);
-			
-        	var features = result.supported_features;
-        	
-        	alert(features);
-		}, function error(err) {
-			alert('error : '+ err);
-		});*/
-
-		try {
-			window.MessengerExtensions.beginShareFlow(
-		            function success(response) {
-		            	alert(response);
-		                if (response.is_sent) {
-		                    alert("send success");
-		                    window.MessengerExtensions.requestCloseBrowser(null, null);
-		                }
-		            }, function error(errorCode, errorMessage) {
-		                alert(errorCode + ":" + errorMessage);
-		            },
-		            messageToShare,
-		            "current_thread");
-		} catch(e) {
-			alert(e);
-		}
-    }
-    
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-        	return;
-        }
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'Messenger'));
-    
-    window.extAsyncInit = function() {
-    	// the Messenger Extensions JS SDK is done loading 
-        alert("This alert is not being executed in webview or chrome mobile");
+  function handler(artist,title,imgurl,link){
+    var subject = title + " - " + artist;
+    var messageToShare = {
+      "attachment":{
+         "type":"template",
+         "payload":{
+             "template_type":"generic",
+             "elements": [{
+                 "title": subject,
+                 "image_url": imgurl,
+                 "default_action":{
+                     "type":"web_url",
+                     "url": link
+                 },
+                 "buttons":[{
+                     "type":"web_url",
+                     "url":"https://m.app.melon.com",
+                     "title":"음악이 필요한 순간, 멜론"
+                 }]
+             }]
+         }
+      }
     };
-    
-</script>
+  
+    window.MessengerExtensions.beginShareFlow(
+      function success(response) {
+        if (response.is_sent) {
+          window.MessengerExtensions.requestCloseBrowser(null, null);
+        }
+      }, function error(errorCode, errorMessage) {
+      },
+      messageToShare,
+      "current_thread");  
+      
+  }
+  window.extAsyncInit = function() {
+    alert("AsyncInit ok");
+    };
+  (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'Messenger'));
+    </script>
+  </body>
 
 <div class="container">
 	<div class="wrapper search_song">
